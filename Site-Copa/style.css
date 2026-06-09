@@ -1,0 +1,455 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-pitch:  #1a6b3a;
+    --green-light:  #22883f;
+    --gold:         #f5c518;
+    --gold-dim:     #c9a012;
+    --white:        #f7f8f3;
+    --gray-50:      #f0f1ec;
+    --gray-200:     #d4d6cc;
+    --gray-400:     #8e9180;
+    --gray-600:     #555a48;
+    --dark:         #111810;
+    --win:          #1e7c3a;
+    --draw:         #b07a00;
+    --loss:         #831b1b;
+    --win-bg:       #d4f5de;
+    --draw-bg:      #fff3cc;
+    --loss-bg:      #fdd8d8;
+    --radius:       8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  header {
+    background: linear-gradient(160deg, #0e3d1f 0%, #1a6b3a 60%, #0e3d1f 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 32px 24px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px, transparent 38px,
+      rgba(255,255,255,.035) 38px, rgba(255,255,255,.035) 40px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px, transparent 38px,
+      rgba(255,255,255,.035) 38px, rgba(255,255,255,.035) 40px
+    );
+    pointer-events: none;
+  }
+  .header-trophy { font-size: 48px; display: block; margin-bottom: 4px; }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    letter-spacing: .08em;
+    color: var(--gold);
+    text-shadow: 0 2px 12px rgba(0,0,0,.5);
+    line-height: 1;
+  }
+  header p {
+    margin-top: 8px;
+    color: rgba(247,248,243,.7);
+    font-size: .9rem;
+    font-weight: 500;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  /* ─── LAYOUT ──────────────────────────────────── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .card {
+    background: #1c2218;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .card-header {
+    background: rgba(34,136,63,.18);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.35rem;
+    letter-spacing: .07em;
+    color: var(--gold);
+  }
+  .card-header .icon { font-size: 1.2rem; }
+  .card-body { padding: 24px; }
+
+  /* ─── ADD MATCH ───────────────────────────────── */
+  .match-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 140px;
+  }
+  .form-group label {
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--gray-400);
+  }
+  select, input[type="number"] {
+    background: #121710;
+    border: 1.5px solid rgba(255,255,255,.12);
+    border-radius: var(--radius);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: .9rem;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color .2s;
+    width: 100%;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  select:focus, input[type="number"]:focus {
+    border-color: var(--green-light);
+    box-shadow: 0 0 0 3px rgba(34,136,63,.25);
+  }
+  select option { background: #1c2218; }
+
+  .vs-badge {
+    background: var(--gold);
+    color: var(--dark);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: .06em;
+    border-radius: 6px;
+    padding: 10px 14px;
+    white-space: nowrap;
+    align-self: flex-end;
+    margin-bottom: 0;
+  }
+
+  /* ─── BUTTONS ─────────────────────────────────── */
+  .btn {
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius);
+    padding: 11px 22px;
+    font-size: .88rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    transition: filter .15s, transform .1s;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary {
+    background: var(--green-light);
+    color: #fff;
+  }
+  .btn-primary:hover { filter: brightness(1.12); }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--dark);
+  }
+  .btn-gold:hover { filter: brightness(1.08); }
+  .btn-danger {
+    background: transparent;
+    border: 1.5px solid rgba(200,50,50,.4);
+    color: #e07070;
+    padding: 6px 12px;
+    font-size: .78rem;
+  }
+  .btn-danger:hover { background: rgba(200,50,50,.15); }
+
+  /* ─── MATCHES TABLE ───────────────────────────── */
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .88rem;
+  }
+  thead th {
+    background: rgba(0,0,0,.3);
+    color: var(--gray-400);
+    font-weight: 600;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  thead th.center { text-align: center; }
+  tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    transition: background .15s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,.03); }
+  tbody td {
+    padding: 11px 14px;
+    vertical-align: middle;
+  }
+  tbody td.center { text-align: center; }
+
+  .country-name {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .flag { font-size: 1.25rem; }
+
+  .score-input {
+    width: 54px;
+    text-align: center;
+    padding: 7px 6px;
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .result-pill {
+    display: inline-block;
+    border-radius: 20px;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+  }
+  .pill-win  { background: var(--win-bg);  color: var(--win);  }
+  .pill-draw { background: var(--draw-bg); color: var(--draw); }
+  .pill-loss { background: var(--loss-bg); color: var(--loss); }
+
+  .empty-state {
+    text-align: center;
+    color: var(--gray-400);
+    padding: 32px;
+    font-size: .9rem;
+  }
+  .empty-state .empty-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; opacity: .5; }
+
+  /* ─── STANDINGS ───────────────────────────────── */
+  .standings-pos {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    color: var(--gray-400);
+    min-width: 28px;
+  }
+  .standings-pos.top4 { color: var(--gold); }
+  .semibadge {
+    font-size: .65rem;
+    background: var(--gold);
+    color: var(--dark);
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+  .pts-cell {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+  }
+
+  /* ─── BRACKET ─────────────────────────────────── */
+  .bracket-grid {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0;
+    align-items: center;
+  }
+
+  .semifinal-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .bracket-match {
+    background: #0e1a0f;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .bracket-match-title {
+    background: rgba(34,136,63,.2);
+    color: var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: .85rem;
+    letter-spacing: .08em;
+    padding: 6px 14px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .bracket-team {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    font-weight: 600;
+    font-size: .88rem;
+    transition: background .15s;
+  }
+  .bracket-team:last-child { border-bottom: none; }
+  .bracket-team.winner {
+    background: rgba(34,136,63,.2);
+    color: #7eff9b;
+  }
+  .bracket-team .score-badge {
+    background: rgba(0,0,0,.3);
+    border-radius: 5px;
+    padding: 3px 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    min-width: 36px;
+    text-align: center;
+  }
+  .bracket-team.winner .score-badge { background: rgba(34,136,63,.4); color: #7eff9b; }
+
+  .bracket-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--gold);
+    font-size: 1.3rem;
+    padding: 0 8px;
+  }
+  .arrow-line {
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    opacity: .5;
+  }
+
+  .final-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .champion-card {
+    text-align: center;
+    padding: 24px 20px 20px;
+    background: linear-gradient(160deg, #2a1800 0%, #3d2500 100%);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    min-width: 180px;
+  }
+  .champion-trophy { font-size: 2.5rem; display: block; margin-bottom: 6px; }
+  .champion-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: .8rem;
+    letter-spacing: .15em;
+    color: var(--gold-dim);
+    margin-bottom: 4px;
+  }
+  .champion-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: .06em;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .champion-flag { font-size: 2rem; display: block; margin-top: 8px; }
+
+  .pending-text {
+    color: var(--gray-400);
+    font-size: .82rem;
+    font-style: italic;
+    text-align: center;
+    padding: 12px;
+  }
+
+  /* ─── SECTION DIVIDER ─────────────────────────── */
+  .section-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 24px 24px;
+  }
+
+  /* ─── TOAST ───────────────────────────────────── */
+  #toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #222e1e;
+    border: 1.5px solid var(--green-light);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-size: .88rem;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    pointer-events: none;
+    opacity: 0;
+    transition: transform .3s ease, opacity .3s ease;
+    z-index: 999;
+  }
+  #toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  /* ─── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 680px) {
+    .bracket-grid { grid-template-columns: 1fr 40px 1fr; }
+    .champion-card { min-width: 120px; padding: 16px 10px; }
+    .arrow-line { height: 40px; }
+    .card-body { padding: 16px; }
+    .match-form { gap: 10px; }
+  }
+  @media (max-width: 480px) {
+    .bracket-grid { grid-template-columns: 1fr 30px 1fr; font-size: .8rem; }
+    .bracket-team { padding: 8px 10px; }
+    .score-badge { display: none; }
+  }
